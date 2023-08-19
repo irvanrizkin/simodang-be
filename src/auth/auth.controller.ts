@@ -12,4 +12,11 @@ export class AuthController {
     const { email, password } = authDto;
     return this.authService.register(email, password);
   }
+
+  @Post('login')
+  async login(@Body() authDto: AuthDto): Promise<{ token: string }> {
+    const { email, password } = authDto;
+    const token = await this.authService.login(email, password);
+    return { token };
+  }
 }
