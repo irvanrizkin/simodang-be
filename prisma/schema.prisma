@@ -19,4 +19,28 @@ model User {
   address     String?
   profilePic  String?
   token       String?
+  ponds       Pond[]
+}
+
+model Pond {
+  id          Int       @default(autoincrement()) @id
+  deviceId    String
+  address     String
+  city        String
+  seedDate    DateTime?
+  tempUpper   Int       @default(30)
+  tempLower   Int       @default(28)
+  hmdUpper    Int       @default(70)
+  hmdLower    Int       @default(80)
+  phUpper     Decimal   @default(9)
+  phLower     Decimal   @default(6.5)
+  tdoUpper    Int       @default(8)
+  tdoLower    Int       @default(4)
+  salUpper    Int       @default(25)
+  salLower    Int       @default(15)
+  fcrUpper    Decimal   @default(1.5)
+  fcrLower    Decimal   @default(1.2)
+  status      String    @default("baik")
+  user        User      @relation(fields: [userId], references: [id])
+  userId      Int
 }
