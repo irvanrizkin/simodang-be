@@ -18,4 +18,10 @@ export class PondsService {
       },
     });
   }
+
+  async getPondsByUser(userId: number): Promise<Pond[]> {
+    return this.prisma.pond.findMany({
+      where: { userId },
+    });
+  }
 }
