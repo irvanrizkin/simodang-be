@@ -23,24 +23,22 @@ model User {
 }
 
 model Pond {
-  id          Int       @default(autoincrement()) @id
-  deviceId    String
-  address     String
-  city        String
-  seedDate    DateTime?
-  tempUpper   Int       @default(30)
-  tempLower   Int       @default(28)
-  hmdUpper    Int       @default(70)
-  hmdLower    Int       @default(80)
-  phUpper     Decimal   @default(9)
-  phLower     Decimal   @default(6.5)
-  tdoUpper    Int       @default(8)
-  tdoLower    Int       @default(4)
-  salUpper    Int       @default(25)
-  salLower    Int       @default(15)
-  fcrUpper    Decimal   @default(1.5)
-  fcrLower    Decimal   @default(1.2)
-  status      String    @default("baik")
-  user        User      @relation(fields: [userId], references: [id])
-  userId      Int
+  id                   Int       @default(autoincrement()) @id
+  deviceId             String
+  address              String
+  city                 String
+  seedDate             DateTime
+  tempHigh             Int       @default(30)
+  tempLow              Int       @default(28)
+  phHigh               Decimal   @default(9)
+  phLow                Decimal   @default(6.5)
+  tdoHigh              Int       @default(8)
+  tdoLow               Int       @default(4)
+  tdsHigh              Int       @default(1200)
+  tdsLow               Int       @default(1000)
+  turbiditiesHigh      Decimal   @default(0.25)
+  turbiditiesLow       Decimal   @default(0.1)
+  status               String    @default("green")
+  user                 User      @relation(fields: [userId], references: [id])
+  userId               Int
 }
