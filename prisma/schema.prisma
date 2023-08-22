@@ -41,4 +41,17 @@ model Pond {
   status               String    @default("green")
   user                 User      @relation(fields: [userId], references: [id])
   userId               Int
+  metrics              Metric[]
+}
+
+model Metric {
+  id              Int       @default(autoincrement()) @id
+  temperature     Decimal   @db.Decimal(10,2)
+  ph              Decimal   @db.Decimal(10,2)
+  tdo             Decimal   @db.Decimal(10,2)
+  tds             Decimal   @db.Decimal(10,2)
+  turbidity       Decimal   @db.Decimal(10,2)
+  pond            Pond      @relation(fields: [pondId], references: [id])
+  pondId          Int
+  createdAt       DateTime  @default(now())
 }
