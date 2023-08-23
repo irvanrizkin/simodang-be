@@ -25,4 +25,10 @@ export class PondsService {
       where: { userId },
     });
   }
+
+  async getPondById(id: number): Promise<Pond> {
+    return this.prisma.pond.findUnique({
+      where: { id },
+    });
+  }
 }

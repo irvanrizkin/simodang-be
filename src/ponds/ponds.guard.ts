@@ -4,22 +4,25 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { PrismaService } from 'src/services/prisma.service';
+import { PondsService } from './ponds.service';
 
 @Injectable()
 export class PondsGuard implements CanActivate {
-  constructor(private prisma: PrismaService) {}
+  constructor(private pondsService: PondsService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
-    const { pool_id: id } = request.body;
 
-    const pond = await this.prisma.pond.findUnique({
-      where: { id },
-    });
+    if (request.method === 'POST') {
+      const { pool_id: id } = request.body;
+      const pond = await this.pondsService.getPondById(id);
+      if (!pond) throw new NotFoundException();
+      return true;
+    }
 
+    const { id } = request.params;
+    const pond = await this.pondsService.getPondById(+id);
     if (!pond) throw new NotFoundException();
-
     return true;
   }
 }
