@@ -12,4 +12,10 @@ export class UsersService {
       data: { token: '' },
     });
   }
+
+  async getProfile(id: number): Promise<User> {
+    return this.prisma.user.findUnique({
+      where: { id },
+    });
+  }
 }
