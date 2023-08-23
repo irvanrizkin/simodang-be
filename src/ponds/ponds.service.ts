@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Pond } from '@prisma/client';
+import { Pond, Prisma } from '@prisma/client';
 import { PrismaService } from 'src/services/prisma.service';
 import { PondsDto } from './dto/ponds.dto';
 
@@ -28,6 +28,13 @@ export class PondsService {
 
   async getPondById(id: number): Promise<Pond> {
     return this.prisma.pond.findUnique({
+      where: { id },
+    });
+  }
+
+  async updatePond(id: number, data: Prisma.PondUpdateInput): Promise<Pond> {
+    return this.prisma.pond.update({
+      data,
       where: { id },
     });
   }
