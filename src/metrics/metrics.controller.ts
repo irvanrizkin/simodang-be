@@ -34,4 +34,12 @@ export class MetricsController {
   ) {
     return this.metricsService.getMetricsRangeDate(id, dateParamsDto);
   }
+
+  @Get(':id/last')
+  @UseGuards(PondsGuard)
+  async getLastMetric(
+    @Param('id', new ParseIntPipe()) id: number,
+  ): Promise<MetricModel> {
+    return this.metricsService.getLastMetric(id);
+  }
 }

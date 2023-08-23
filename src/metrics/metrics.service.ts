@@ -43,4 +43,13 @@ export class MetricsService {
       DATE(createdAt) DESC;
     `;
   }
+
+  async getLastMetric(pondId: number) {
+    return this.prisma.metric.findFirst({
+      where: { pondId },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+  }
 }
