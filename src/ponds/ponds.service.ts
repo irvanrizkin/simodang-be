@@ -8,9 +8,10 @@ export class PondsService {
   constructor(private prisma: PrismaService) {}
 
   async addPond(pondsDto: PondsDto, userId: number): Promise<Pond> {
-    const { deviceId, seedDate, address, city } = pondsDto;
+    const { name, deviceId, seedDate, address, city } = pondsDto;
     return this.prisma.pond.create({
       data: {
+        name,
         deviceId,
         seedDate,
         address,

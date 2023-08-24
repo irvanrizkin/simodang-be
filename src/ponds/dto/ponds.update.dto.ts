@@ -1,4 +1,5 @@
 export class PondsUpdateDto {
+  name?: string;
   deviceId?: string;
   address?: string;
   city?: string;
