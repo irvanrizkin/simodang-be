@@ -17,8 +17,8 @@ model User {
   name        String
   phoneNum    String?
   address     String?
-  profilePic  String?
-  token       String?
+  profilePic  String  @default("https://placehold.co/500x500.png")
+  token       String  @default("")
   ponds       Pond[]
 }
 
