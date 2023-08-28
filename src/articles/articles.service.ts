@@ -16,4 +16,8 @@ export class ArticlesService {
       },
     });
   }
+
+  async getArticles(): Promise<Article[]> {
+    return this.prisma.article.findMany();
+  }
 }

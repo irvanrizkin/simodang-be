@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Post,
   Request,
   UploadedFile,
@@ -11,6 +12,7 @@ import { ArticleDto } from './dto/articles.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { Article as ArticleModel } from '@prisma/client';
 
 @Controller('articles')
 export class ArticlesController {
@@ -39,5 +41,10 @@ export class ArticlesController {
       file.filename
     }`;
     return this.articlesService.addArticle(articlesDto);
+  }
+
+  @Get()
+  async getArticles(): Promise<ArticleModel[]> {
+    return this.articlesService.getArticles();
   }
 }
