@@ -31,4 +31,13 @@ export class UsersService {
       where: { id },
     });
   }
+
+  async changeProfilePic(id: number, file: Express.Multer.File): Promise<User> {
+    return this.prisma.user.update({
+      data: {
+        profilePic: file.filename,
+      },
+      where: { id },
+    });
+  }
 }
