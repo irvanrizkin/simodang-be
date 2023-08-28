@@ -39,4 +39,13 @@ export class PondsService {
       where: { id },
     });
   }
+
+  async changeImage(id: number, imageUrl: string): Promise<Pond> {
+    return this.prisma.pond.update({
+      data: {
+        imageUrl: imageUrl,
+      },
+      where: { id },
+    });
+  }
 }
