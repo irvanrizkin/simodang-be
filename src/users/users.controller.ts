@@ -38,15 +38,8 @@ export class UsersController {
   async getProfile(@Request() req): Promise<UserProfileDto> {
     const { id: userId } = req.user;
     const user = await this.usersService.getProfile(userId);
-    const { id, email, name, phoneNum, address, profilePic } = user;
-    return {
-      id,
-      email,
-      name,
-      phoneNum,
-      address,
-      profilePic,
-    };
+    const userDto = plainToInstance(UserDto, user);
+    return userDto;
   }
 
   @Patch(':id')
@@ -56,15 +49,8 @@ export class UsersController {
     @Body() userUpdateDto: UserUpdateDto,
   ): Promise<UserProfileDto> {
     const user = await this.usersService.updateUser(userId, userUpdateDto);
-    const { id, email, name, phoneNum, address, profilePic } = user;
-    return {
-      id,
-      email,
-      name,
-      phoneNum,
-      address,
-      profilePic,
-    };
+    const userDto = plainToInstance(UserDto, user);
+    return userDto;
   }
 
   @Patch('profile-pic/:id')
