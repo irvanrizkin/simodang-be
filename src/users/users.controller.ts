@@ -83,10 +83,14 @@ export class UsersController {
     }),
   )
   async changeProfilePic(
+    @Request() req,
     @Param('id', new ParseIntPipe()) userId: number,
     @UploadedFile() file: Express.Multer.File,
   ): Promise<UserDto> {
-    const user = await this.usersService.changeProfilePic(userId, file);
+    const profilePic = `${req.protocol}://${req.get('Host')}/assets/profile/${
+      file.filename
+    }`;
+    const user = await this.usersService.changeProfilePic(userId, profilePic);
     const userDto = plainToInstance(UserDto, user);
     return userDto;
   }
